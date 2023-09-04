@@ -1,0 +1,9 @@
+.site-logo{
+    width:60%;
+    padding:10px 10px;
+    border-radius:30px;
+}
+
+footer{
+    background-color: var(--navbar-footer-color);
+}

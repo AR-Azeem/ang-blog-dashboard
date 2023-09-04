@@ -1,0 +1,11 @@
+.site-logo{
+    padding:15px 30px;
+    margin:5px;
+    font-size: 1.5em;
+    border-radius: 25px;
+}
+header{
+    margin-bottom: 30px;
+    padding-top:30px;
+    height:100px;
+}

@@ -1,0 +1,47 @@
+<div class="container bg-secondary-theme p-3 category">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h5 class="text-primary-color pt-3">CATEGORIES</h5>
+            <p>you can add categories here</p>
+        </div>
+    </div>
+    <form action="" #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+        <div class="row justify-content-center">
+
+            <div class="col-md-8 form-group">
+                <input type="text" name="categoryName" class="form-control" [(ngModel)]="categoryNameValue" required #categoryName="ngModel" [ngClass]="{'is-invalid':categoryName.touched && !categoryName.valid}">
+                <small *ngIf="categoryName.touched && !categoryName.valid" class="text-danger">Category is required...</small>
+            </div>
+            
+            <div class="col-md-2  d-grid gap-2">
+                <button type="submit" class="btn btn-custom" [disabled]="!categoryForm.valid">{{formStatus}} Category</button>
+            </div>
+
+
+        </div>
+    </form>
+
+    <div class="row my-3 justify-content-center">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td><h6 class="text-center">No</h6></td>
+                        <td><h6 class="text-center">Category</h6></td>
+                        <td><h6 class="text-center">Actions</h6></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categoriesData;let i=index">
+                        <td class="text-center">{{i+1}}</td>
+                        <td class="text-center">{{category.data.category}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm" (click)="onEdit(category.id,category.data.category)">EDIT</button>
+                            <button class="btn btn-danger ms-3 btn-sm" (click)="onDelete(category.id)">DELETE</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-body bg-secondary-theme  shadow-effect">
+                    <h4 class=" text-primary-color text-center">Login</h4>
+                    <p class="text-center">Please login to create new post</p>
+                    <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                        <div class="mb-3">
+                            <input type="email"
+                            class="form-control"
+                            placeholder="email" 
+                            name="email"
+                            #EMAIL = 'ngModel' 
+                            ngModel
+                            required
+                            email
+                            [ngClass]="{'is-invalid':EMAIL.touched && EMAIL.invalid}"
+                            >
+                            <div *ngIf = "EMAIL.errors?.['required']">
+                                <small *ngIf="EMAIL.touched && EMAIL.invalid"  class="text-danger text-start">email is required...</small>
+                            </div>
+                            <div *ngIf = "EMAIL.errors?.['email']">
+                                <small *ngIf="EMAIL.touched && EMAIL.invalid" class="text-danger">please provide valid email...</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" 
+                            class="form-control" 
+                            placeholder="password" 
+                            name="password"
+                            #PASSWORD="ngModel" 
+                            ngModel
+                            required
+                            [ngClass]="{'is-invalid':PASSWORD.touched && PASSWORD.invalid}"
+                            >
+                            <div>
+                                <small *ngIf="PASSWORD.touched && PASSWORD.invalid"  class="text-danger">password is required...</small>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button  type="submit" class="btn btn-theme" [disabled]="loginForm.invalid">login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

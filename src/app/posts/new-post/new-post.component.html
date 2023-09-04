@@ -1,0 +1,94 @@
+<div class="contianer">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4 class="text-primary-color">{{formStatus}} Post</h4>
+            <p>you can {{formStatus}} new post from here</p>
+        </div>
+    </div>
+    <div *ngIf="postForm">
+        <form action="" class="container" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card mb-4 shadow-effect">
+                        <div class="card-body p-3">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" (keyup)="onTitle($event)" formControlName = 'title' [ngClass]="{'is-invalid':fc['title'].touched && fc['title'].invalid}">
+                                <div *ngIf="fc['title']?.errors?.['required']">
+                                    <small *ngIf="fc['title'].touched && fc['title'].invalid" class="text-danger">title is required</small>
+                                </div>
+                                <div *ngIf="fc['title']?.errors?.['minlength']">
+                                    <small *ngIf="fc['title'].touched && fc['title'].invalid" class="text-danger">Min 10 character is required</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="permalink" class="form-label">Permalink</label>
+                                <input type="text" class="form-control" id="permalink"  [(ngModel)]="permalink" formControlName = 'permalink'  >
+                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="excerpt" class="form-label">Excerpt</label>
+                                <textarea rows="10" cols="30" class="form-control" id="excerpt" formControlName = 'excerpt' [ngClass]="{'is-invalid':fc['excerpt'].touched && fc['excerpt'].invalid}"></textarea>
+                                <div *ngIf="fc['excerpt']?.errors?.['required']">
+                                    <small *ngIf="fc['excerpt'].touched && fc['excerpt'].invalid" class="text-danger">excerpt is required</small>
+                                </div>
+                                <div *ngIf="fc['excerpt']?.errors?.['minlength']">
+                                    <small *ngIf="fc['excerpt'].touched && fc['excerpt'].invalid" class="text-danger">Min 20 character is required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-effect mb-4">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Please select post category</label>
+                                <select name="" id="category" class="form-select" formControlName = 'category' [ngClass]="{'is-invalid':fc['category'].touched && fc['category'].invalid}">
+                                    <option value="" disabled selected>Please select category</option>
+                                    <option value="{{category.id}}-{{category.data.category}}" *ngFor="let category of categories">{{category.data.category}}</option>
+    
+                                </select>
+                                <div *ngIf="fc['category']?.errors?.['required']">
+                                    <small *ngIf="fc['category'].touched && fc['category'].invalid" class="text-danger">category is required</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Post Image</label>
+                                <img [src]="img"  class="form-control img-fluid img-preview mb-3">
+                                <input type="file" class="form-control" accept="image/*"  formControlName = 'postImg' (change)="onPreview($event)" [ngClass]="{'is-invalid':fc['postImg'].touched && fc['postImg'].invalid}">
+                                <div *ngIf="fc['postImg']?.errors?.['required']">
+                                    <small *ngIf="fc['postImg'].touched && fc['postImg'].invalid" class="text-danger">PostImg is required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow-effect">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <!-- <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea> -->
+                                <angular-editor formControlName = 'content' [ngClass]="{'is-invalid':fc['content'].touched && fc['content'].invalid}"></angular-editor>
+                                <div *ngIf="fc['content']?.errors?.['required']">
+                                    <small *ngIf="fc['content'].touched && fc['content'].invalid" class="text-danger">content is required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center my-5">
+                    <button  type="submit" class="btn bg-theme" [disabled]="postForm.invalid">{{formStatus}} Post</button>
+                    <button class ="btn btn-warning ms-2" [routerLink]="''">Back to Dashboard</button>
+    
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>

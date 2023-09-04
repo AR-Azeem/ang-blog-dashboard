@@ -1,0 +1,12 @@
+.redBorder{
+    border:1px solid red;
+}
+
+.btn-custom{
+    color:white;
+    background-color: var(--primary-color);
+    height:36px;
+}
+.category{
+    min-height: 40vh;;
+}

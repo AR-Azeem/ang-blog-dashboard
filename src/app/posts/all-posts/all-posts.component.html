@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center bg-secondary-theme">
+                    <h3>All Blog Posts</h3>
+                    <p>From here you can manage your blog posts</p>
+                    <button class="btn bg-theme" [routerLink]="'new'">Add New Posts</button>
+                    <button class="btn btn-warning ms-2" [routerLink]="''">Back to Dashboard</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect my-3">
+                <div class="card-body">
+                    <table class="table table-striped p-3">
+                        <thead>
+                            <tr class="text-center">
+                                <th style="width: 4%">no</th>
+                                <th style="width: 50%">PostImage</th>
+                                <th style="width: 8%">title</th>
+                                <th style="width: 8%">createDate</th>
+                                <th style="width: 30%">Actions</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let post of allPosts;let i = index" class="text-center">
+                                <td >{{i+1}}</td>
+                                <td><img src="{{post.data.postImgPath}}" alt="" class="img img-fluid"></td>
+                                <td>{{post.data.title}}</td>
+                                <td >{{post.data.createdAt.toMillis()|date}}</td>
+                                <td >
+                                    <button class="btn btn-warning btn-sm" [routerLink]="'new'" [queryParams]="{img:post.data.postImgPath,id:post.id}">Edit</button>
+                                    <button class="btn btn-danger ms-3 btn-sm" (click)="onDelete(post.data.postImgPath,post.id)">Delete</button>
+                                    <button class="btn btn-success btn-sm ms-3" (click)="onFeature(post.id)" *ngIf="!post.data.isFeatured">Mark feature</button>
+                                    <button class="btn btn-info btn-sm ms-3" (click)="onRemoveFeature(post.id)" *ngIf="post.data.isFeatured">Remove Feature</button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

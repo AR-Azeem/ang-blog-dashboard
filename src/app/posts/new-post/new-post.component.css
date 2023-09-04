@@ -1,0 +1,7 @@
+.bg-theme{
+    background-color: var(--primary-color);
+    color:white;
+}
+.img-preview{
+    height:260px;
+}
